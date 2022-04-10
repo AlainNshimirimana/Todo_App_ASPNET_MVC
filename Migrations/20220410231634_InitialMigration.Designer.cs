@@ -9,7 +9,7 @@ using Todo_App_ASPNET_MVC.Models;
 namespace Todo_App_ASPNET_MVC.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    [Migration("20220408222359_InitialMigration")]
+    [Migration("20220410231634_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
