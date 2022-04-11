@@ -1,4 +1,4 @@
-﻿@model List<Todo>;
+﻿@model List<Todo_App_ASPNET_MVC.ViewModel.TodoViewModel>;
 
 <h3>Todo List</h3>
 
@@ -10,20 +10,16 @@
 
     @foreach (var task in Model)
     {
-        if(task == null)
-        {
-            <h4>List is empty </h4>
-        }
         <tr>
-            <td data-id="@task.Id"> @task.Id </td>
-            <td> @task.Name </td>
+            <td data-id="@task.Todo.Id"> @task.Todo.Id </td>
+            <td> @task.Todo.Name </td>
             <td>
                 <a asp-action="EditTask" asp-controller="Home"
-                asp-route-itemid="@task.Id"> Edit </a>
+                asp-route-itemid="@task.Todo.Id"> Edit </a>
             </td>
             <td>
                 <a asp-action="DeleteTask" asp-controller="Home"
-                asp-route-itemid="@task.Id"> Delete </a>
+                asp-route-itemid="@task.Todo.Id"> Delete </a>
             </td>
         </tr>
     }

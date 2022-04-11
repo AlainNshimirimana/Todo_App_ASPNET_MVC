@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Todo_App_ASPNET_MVC.Models;
+using Todo_App_ASPNET_MVC.ViewModel;
 
 namespace Todo_App_ASPNET_MVC.Controllers
 {
@@ -20,6 +21,18 @@ namespace Todo_App_ASPNET_MVC.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        // Add a Task
+        [HttpPost]
+        public IActionResult CreateTask(TodoViewModel newTask)
+        {
+            Todo todo = new Todo
+            {
+                Name = newTask.Name
+            };
+            _db.Todos.Add(todo);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
