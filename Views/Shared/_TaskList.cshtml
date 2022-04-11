@@ -1,0 +1,30 @@
+﻿@model List<Todo>;
+
+<h3>Todo List</h3>
+
+<table class="table">
+    <tr>
+        <th> Id </th>
+        <th> Task </th>
+    </tr>
+
+    @foreach (var task in Model)
+    {
+        if(task == null)
+        {
+            <h4>List is empty </h4>
+        }
+        <tr>
+            <td data-id="@task.Id"> @task.Id </td>
+            <td> @task.Name </td>
+            <td>
+                <a asp-action="EditTask" asp-controller="Home"
+                asp-route-itemid="@task.Id"> Edit </a>
+            </td>
+            <td>
+                <a asp-action="DeleteTask" asp-controller="Home"
+                asp-route-itemid="@task.Id"> Delete </a>
+            </td>
+        </tr>
+    }
+</table>
