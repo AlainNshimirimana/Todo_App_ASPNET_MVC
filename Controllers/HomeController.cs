@@ -35,5 +35,14 @@ namespace Todo_App_ASPNET_MVC.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        // Delete Task
+        [HttpGet]
+        public IActionResult DeleteTask(int id)
+        {
+            var task = _db.Todos.Find(id);
+            _db.Todos.Remove(task);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

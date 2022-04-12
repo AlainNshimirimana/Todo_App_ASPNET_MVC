@@ -12,8 +12,8 @@
         if(task != null)
         {
             <tr>
-            <td data-id="@task.Id"> @task.Id </td>
-            <td> @task.Name </td>
+            <td > @task.Id </td>
+            <td data-id="@task.Id" > @task.Name </td>
             <td>
                 <a asp-action="EditTask" asp-controller="Home"
                 asp-route-itemid="@task.Id"> Edit </a>
