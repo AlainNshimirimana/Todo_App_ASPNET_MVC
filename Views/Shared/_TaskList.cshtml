@@ -1,5 +1,4 @@
-﻿@model List<Todo_App_ASPNET_MVC.Models.Todo>;
-
+﻿
 <h3>Todo List</h3>
 
 <table class="table">
@@ -8,9 +7,11 @@
         <th> Task </th>
     </tr>
 
-    @foreach (var task in Model)
+    @foreach (var task in ViewBag.Tasks)
     {
-        <tr>
+        if(task != null)
+        {
+            <tr>
             <td data-id="@task.Id"> @task.Id </td>
             <td> @task.Name </td>
             <td>
@@ -22,5 +23,6 @@
                 asp-route-itemid="@task.Id"> Delete </a>
             </td>
         </tr>
+        }
     }
 </table>

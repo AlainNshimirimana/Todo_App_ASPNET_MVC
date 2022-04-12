@@ -18,14 +18,16 @@ namespace Todo_App_ASPNET_MVC.Controllers
             _db = todoDbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var items = await _db.Todos.ToListAsync();
-            return View(items);
+            //var tlvm = GetAllTasks();
+            var tasks = _db.Todos.ToList();
+            ViewBag.Tasks = tasks;
+            return View();
         }
         // Add a Task
         [HttpPost]
-        public IActionResult CreateTask(TodoViewModel newTask)
+        public IActionResult CreateTask(Todo newTask)
         {
             Todo todo = new Todo
             {
