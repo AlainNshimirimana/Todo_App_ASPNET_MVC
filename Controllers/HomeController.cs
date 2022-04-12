@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,9 +18,10 @@ namespace Todo_App_ASPNET_MVC.Controllers
             _db = todoDbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var items = await _db.Todos.ToListAsync();
+            return View(items);
         }
         // Add a Task
         [HttpPost]
