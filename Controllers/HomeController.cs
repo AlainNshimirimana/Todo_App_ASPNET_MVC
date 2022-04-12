@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Todo_App_ASPNET_MVC.Models;
-using Todo_App_ASPNET_MVC.ViewModel;
 
 namespace Todo_App_ASPNET_MVC.Controllers
 {
@@ -20,7 +19,6 @@ namespace Todo_App_ASPNET_MVC.Controllers
 
         public IActionResult Index()
         {
-            //var tlvm = GetAllTasks();
             var tasks = _db.Todos.ToList();
             ViewBag.Tasks = tasks;
             return View();
