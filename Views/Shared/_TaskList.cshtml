@@ -1,28 +1,31 @@
 ﻿
-<h3>Todo List</h3>
+<div class="card-body">
 
-<table class="table">
-    <tr>
-        <th> Id </th>
-        <th> Task </th>
-    </tr>
-
-    @foreach (var task in ViewBag.Tasks)
-    {
-        if(task != null)
-        {
-            <tr>
-            <td > @task.Id </td>
-            <td  > @task.Name </td>
-            <td>
-                <a asp-action="EditTask" asp-controller="Home"
-                asp-route-id="@task.Id"> Edit </a>
-            </td>
-            <td>
-                <a asp-action="DeleteTask" asp-controller="Home"
-                asp-route-id="@task.Id"> Delete </a>
-            </td>
+    <table class="table table-sm table-striped table-hover">
+        <tr>
+            <th class="text-center"> Id </th>
+            <th class="text-center"> Task </th>
+            <th class="text-center"> </th>
+            <th class="text-center"> </th>
         </tr>
+
+        @foreach (var task in ViewBag.Tasks)
+        {
+            if (task != null)
+            {
+                <tr>
+                    <td class="text-center"> @task.Id </td>
+                    <td class="text-center"> @task.Name </td>
+                    <td class="text-center">
+                        <a asp-action="EditTask" asp-controller="Home"
+                   asp-route-id="@task.Id" class="btn btn-primary"> Edit </a>
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="DeleteTask" asp-controller="Home"
+                   asp-route-id="@task.Id" class="btn btn-danger"> Delete </a>
+                    </td>
+                </tr>
+            }
         }
-    }
-</table>
+    </table>
+</div>
