@@ -13,14 +13,14 @@
         {
             <tr>
             <td > @task.Id </td>
-            <td data-id="@task.Id" > @task.Name </td>
+            <td  > @task.Name </td>
             <td>
                 <a asp-action="EditTask" asp-controller="Home"
-                asp-route-itemid="@task.Id"> Edit </a>
+                asp-route-id="@task.Id"> Edit </a>
             </td>
             <td>
                 <a asp-action="DeleteTask" asp-controller="Home"
-                asp-route-itemid="@task.Id"> Delete </a>
+                asp-route-id="@task.Id"> Delete </a>
             </td>
         </tr>
         }

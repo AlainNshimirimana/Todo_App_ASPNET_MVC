@@ -27,9 +27,9 @@ namespace Todo_App_ASPNET_MVC.Controllers
         [HttpPost]
         public IActionResult CreateTask(Todo newTask)
         {
-            Todo todo = new Todo
-            {
-                Name = newTask.Name
+            Todo todo = new Todo {
+                Id = newTask.Id,
+                Name = newTask.Name 
             };
             _db.Todos.Add(todo);
             _db.SaveChanges();
