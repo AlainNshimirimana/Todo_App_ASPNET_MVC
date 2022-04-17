@@ -44,5 +44,18 @@ namespace Todo_App_ASPNET_MVC.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult EditTask(int id)
+        {
+            Todo todo = _db.Todos.Find(id);
+            return View("UpdateTask", todo);
+        }
+        public IActionResult UpdateTasks(Todo newTask)
+        {
+            var task = _db.Todos.Where(t =>t.Id == newTask.Id).FirstOrDefault(); 
+            task.Name = newTask.Name;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
