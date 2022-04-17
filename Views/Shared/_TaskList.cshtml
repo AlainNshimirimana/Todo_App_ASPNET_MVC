@@ -1,9 +1,12 @@
 ﻿
 <div class="card-body">
+    @{
+        var count = 0;
+    }
 
     <table class="table table-sm table-striped table-hover">
         <tr>
-            <th class="text-center"> Id </th>
+            <th class="text-center"> # </th>
             <th class="text-center"> Task </th>
             <th class="text-center"> </th>
             <th class="text-center"> </th>
@@ -11,10 +14,11 @@
 
         @foreach (var task in ViewBag.Tasks)
         {
+            count++;
             if (task != null)
             {
                 <tr>
-                    <td class="text-center"> @task.Id </td>
+                    <td class="text-center"> @count </td>
                     <td class="text-center"> @task.Name </td>
                     <td class="text-center">
                         <a asp-action="EditTask" asp-controller="Home"
