@@ -2,3 +2,15 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function deleteTask(i){
+    $.ajax({
+        url: 'Home/Delete',
+        type: 'POST',
+        data: {
+            id: i
+        },
+        success: function(){  // if successfully deleted, reload page
+            window.location.reload();
+        }
+    });
+}

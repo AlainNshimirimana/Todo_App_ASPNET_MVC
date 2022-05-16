@@ -84,7 +84,20 @@ namespace Todo_App_ASPNET_MVC.Controllers
                     }
                 }
             }
-            return Redirect("Index");
+            return Redirect("http://localhost:5000/");
+        }
+
+        //Delete
+        [HttpPost]
+        public JsonResult Delete(int id){
+            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite")){
+                using (var cmd = con.CreateCommand()){
+                    con.Open();
+                    cmd.CommandText = $"DELETE FROM todo WHERE Id = '{id}'";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            return Json(new{});
         }
     }
 }
