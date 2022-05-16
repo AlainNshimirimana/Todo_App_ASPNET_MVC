@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Todo_App_ASPNET_MVC.Models;
 using Microsoft.Data.Sqlite;
 
@@ -13,6 +14,12 @@ namespace Todo_App_ASPNET_MVC.Controllers
     public class HomeController : Controller
     {
 
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             var todoViewModel = GetAllTodos();
@@ -21,7 +28,7 @@ namespace Todo_App_ASPNET_MVC.Controllers
         // Get Todo items from the database
         internal TodoViewModel GetAllTodos()
         {
-            List<Todo> todos = new();
+            List<Todo> todos = new List<Todo>();
             using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
             {
                 using (var cmd = con.CreateCommand())
@@ -46,7 +53,7 @@ namespace Todo_App_ASPNET_MVC.Controllers
                         {
                             return new TodoViewModel
                             {
-                                Todos = todos
+                                TodoList = todos
                             };
                         }
                     };
@@ -54,19 +61,19 @@ namespace Todo_App_ASPNET_MVC.Controllers
             }
             return new TodoViewModel
             {
-                Todos = todos
+                TodoList = todos
             };
 
         }
         // Add a Task
-        public IActionResult CreateTask(Todo newTask)
+        public RedirectResult CreateTask(Todo todo)
         {
             using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
             {
                 using (var cmd = con.CreateCommand())
                 {
                     con.Open();
-                    cmd.CommandText = $"INSERT INTO todo (name) VALUES ('{newTask.Name}')";
+                    cmd.CommandText = $"INSERT INTO todo (name) VALUES ('{todo.Name}')";
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -77,29 +84,7 @@ namespace Todo_App_ASPNET_MVC.Controllers
                     }
                 }
             }
-            return Redirect("Index");
+            return Redirect("http://localhost:5000/");
         }
-        // Delete Task
-        /*[HttpGet]
-        public IActionResult DeleteTask(int id)
-        {
-            var task = _db.Todos.Find(id);
-            _db.Todos.Remove(task);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult EditTask(int id)
-        {
-            Todo todo = _db.Todos.Find(id);
-            return View("UpdateTask", todo);
-        }
-        public IActionResult UpdateTasks(Todo newTask)
-        {
-            var task = _db.Todos.Where(t =>t.Id == newTask.Id).FirstOrDefault(); 
-            task.Name = newTask.Name;
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
     }
 }

@@ -4,7 +4,7 @@ namespace Todo_App_ASPNET_MVC.Models
 {
     public class TodoViewModel
     {
-        public List<Todo> Todos { get; set; }
+        public List<Todo> TodoList { get; set; }
         public Todo todo { get; set; }
     }
 }

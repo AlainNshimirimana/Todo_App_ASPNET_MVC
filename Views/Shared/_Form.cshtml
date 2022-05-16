@@ -1,10 +1,10 @@
-﻿@model Todo;
+﻿@model TodoViewModel;
 
-<form asp-action="CreateTask" id="form-action" method="post" role="form" asp-controller="Home">
+<form asp-action="CreateTask" id="form-action" method="post" role="form">
     <div asp-validation-summary="All"></div>
-    <label asp-for="Name"></label>
-    <input asp-for="Id" type="hidden"/>
-    <input asp-for="Name"/>
-    <span asp-validation-for="Name"></span>
-    <input type="submit" id="from-button" value="ADD" class="btn btn-success"/>
+    <label asp-for="todo.Name"></label>
+    <input asp-for="todo.Id" type="hidden"/>
+    <input asp-for="todo.Name"/>
+    <span asp-validation-for="todo.Name"></span>
+    <input type="submit" id="form-button" value="ADD" class="btn btn-success"/>
 </form>

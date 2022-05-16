@@ -14,14 +14,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var task in Model.Todos)
+            @foreach (var task in Model.TodoList)
             {
                 count++;
                 if (task != null)
                 {
                     <tr>
                         <td class="text-center" scope="row"> @count </td>
-                        <td class="text-center"> @task.Name </td>
+                        <td class="text-center" scope="row"> @task.Name </td>
                         <td class="text-center"></td>
                         <td class="text-center"></td>
                     </tr>
