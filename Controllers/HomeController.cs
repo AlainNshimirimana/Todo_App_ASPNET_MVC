@@ -84,7 +84,7 @@ namespace Todo_App_ASPNET_MVC.Controllers
                     }
                 }
             }
-            return Redirect("http://localhost:5000/");
+            return Redirect("Index");
         }
     }
 }

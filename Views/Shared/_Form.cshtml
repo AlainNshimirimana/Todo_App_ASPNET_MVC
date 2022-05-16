@@ -1,6 +1,6 @@
 ﻿@model TodoViewModel;
 
-<form asp-action="CreateTask" id="form-action" method="post" role="form">
+<form asp-action="CreateTask" id="form-action" method="post" role="form" >
     <div asp-validation-summary="All"></div>
     <label asp-for="todo.Name"></label>
     <input asp-for="todo.Id" type="hidden"/>
