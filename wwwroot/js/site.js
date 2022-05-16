@@ -2,6 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+// Delete method
 function deleteTask(i){
     $.ajax({
         url: 'Home/Delete',
@@ -11,6 +13,24 @@ function deleteTask(i){
         },
         success: function(){  // if successfully deleted, reload page
             window.location.reload();
+        }
+    });
+}
+
+// Update method
+function updateTask(i){
+    $.ajax({
+        url: 'Home/PopulateForm',
+        type: 'GET',
+        data: {
+            id: i
+        },
+        dataType: 'json',
+        success: function(response){ 
+            $("#Todo_Name").val(response.name);
+            $("#Todo_Id").val(response.id);
+            $("#form-button").val(Update);
+            $("#form-action").attr("action", "/Home/Update");
         }
     });
 }

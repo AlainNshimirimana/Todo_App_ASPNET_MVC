@@ -65,7 +65,7 @@ namespace Todo_App_ASPNET_MVC.Controllers
             };
 
         }
-        // Add a Task
+        // ADD new Task
         public RedirectResult CreateTask(Todo todo)
         {
             using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
@@ -80,14 +80,62 @@ namespace Todo_App_ASPNET_MVC.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        Console.WriteLine(ex.Message);
                     }
                 }
             }
             return Redirect("http://localhost:5000/");
         }
+        // UPDATE
+        [HttpGet]
+        public JsonResult PopulateForm(int id){
+            var todo = GetById(id);
+            return Json(todo);
+        }
+        internal Todo GetById(int id){
+            Todo todo = new Todo();
+            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite")){
+                using (var cmd = con.CreateCommand()){
+                    con.Open();
+                    cmd.CommandText = $"SELECT * FROM todo WHERE Id = '{id}'";
+                    
+                    using (var reader = cmd.ExecuteReader()){
+                        if (reader.HasRows){
+                            reader.Read();
+                            todo.Id = reader.GetInt32(0);
+                            todo.Name = reader.GetString(1);
+                        }
+                        else{
+                            return todo;
+                        }
+                    };
+                }
+            }
+            return todo;
+        }
 
-        //Delete
+        public RedirectResult Update(Todo todo)
+        {
+            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
+            {
+                using (var cmd = con.CreateCommand())
+                {
+                    con.Open();
+                    cmd.CommandText = $"UPDATE todo SET Name = '{todo.Name}' WHERE Id = '{todo.Id}'";
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                return Redirect("http://localhost:5000/");
+            }
+        }
+
+        // DELETE
         [HttpPost]
         public JsonResult Delete(int id){
             using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite")){
