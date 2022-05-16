@@ -21,9 +21,6 @@ namespace Todo_App_ASPNET_MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<Models.TodoDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString"))
-                );
             services.AddControllersWithViews();
         }
 

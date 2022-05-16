@@ -6,37 +6,81 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Todo_App_ASPNET_MVC.Models;
+using Microsoft.Data.Sqlite;
 
 namespace Todo_App_ASPNET_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TodoDbContext _db;
-        public HomeController(TodoDbContext todoDbContext)
-        {
-            _db = todoDbContext;
-        }
 
         public IActionResult Index()
         {
-            var tasks = _db.Todos.ToList();
-            ViewBag.Tasks = tasks;
-            return View();
+            var todoViewModel = GetAllTodos();
+            return View(todoViewModel);
+        }
+        // Get Todo items from the database
+        internal TodoViewModel GetAllTodos()
+        {
+            List<Todo> todos = new();
+            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
+            {
+                using (var cmd = con.CreateCommand())
+                {
+                    con.Open();
+                    cmd.CommandText = $"SELECT * FROM todo";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                todos.Add(new Todo
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+                        }
+                        else
+                        {
+                            return new TodoViewModel
+                            {
+                                Todos = todos
+                            };
+                        }
+                    };
+                }
+            }
+            return new TodoViewModel
+            {
+                Todos = todos
+            };
+
         }
         // Add a Task
-        [HttpPost]
         public IActionResult CreateTask(Todo newTask)
         {
-            Todo todo = new Todo {
-                Id = newTask.Id,
-                Name = newTask.Name 
-            };
-            _db.Todos.Add(todo);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite"))
+            {
+                using (var cmd = con.CreateCommand())
+                {
+                    con.Open();
+                    cmd.CommandText = $"INSERT INTO todo (name) VALUES ('{newTask.Name}')";
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+            }
+            return Redirect("Index");
         }
         // Delete Task
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult DeleteTask(int id)
         {
             var task = _db.Todos.Find(id);
@@ -56,6 +100,6 @@ namespace Todo_App_ASPNET_MVC.Controllers
             task.Name = newTask.Name;
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }
