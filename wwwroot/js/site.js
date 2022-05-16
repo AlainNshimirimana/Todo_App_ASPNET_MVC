@@ -27,8 +27,8 @@ function updateTask(i){
         },
         dataType: 'json',
         success: function(response){ 
-            $("#Todo_Name").val(response.name);
-            $("#Todo_Id").val(response.id);
+            $("#todo_Name").val(response.name);
+            $("#todo_Id").val(response.id);
             $("#form-button").val(Update);
             $("#form-action").attr("action", "/Home/Update");
         }

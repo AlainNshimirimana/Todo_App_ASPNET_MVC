@@ -93,8 +93,8 @@ namespace Todo_App_ASPNET_MVC.Controllers
             return Json(todo);
         }
         internal Todo GetById(int id){
-            Todo todo = new Todo();
-            using (SqliteConnection con = new SqliteConnection("Data Source=tododb.sqlite")){
+            Todo todo = new();
+            using (var con = new SqliteConnection("Data Source=tododb.sqlite")){
                 using (var cmd = con.CreateCommand()){
                     con.Open();
                     cmd.CommandText = $"SELECT * FROM todo WHERE Id = '{id}'";
