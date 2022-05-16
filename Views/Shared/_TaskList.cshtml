@@ -7,10 +7,10 @@
     <table class="table table-sm table-striped table-hover">
         <thead>
             <tr>
-                <th class="text-center" scope="col"> # </th>
-                <th class="text-center" scope="col"> Task </th>
-                <th class="text-center" scope="col"> </th>
-                <th class="text-center" scope="col"> </th>
+                <th class="text-center"> # </th>
+                <th class="text-center"> Task </th>
+                <th class="text-center"> </th>
+                <th class="text-center"> </th>
             </tr>
         </thead>
         <tbody>
@@ -20,10 +20,14 @@
                 if (task != null)
                 {
                     <tr>
-                        <td class="text-center" scope="row"> @count </td>
-                        <td class="text-center" scope="row"> @task.Name </td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
+                        <td class="text-center"> @count </td>
+                        <td class="text-center"> @task.Name </td>
+                        <td class="text-center">
+                            <input type="submit" class="btn btn-primary" value="Update"/>
+                        </td>
+                        <td class="text-center">
+                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                        </td>
                     </tr>
                 }
             }
