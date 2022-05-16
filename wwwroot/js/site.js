@@ -18,7 +18,7 @@ function deleteTask(i){
 }
 
 // Update method
-function updateTask(i){
+function populateForm(i){
     $.ajax({
         url: 'Home/PopulateForm',
         type: 'GET',

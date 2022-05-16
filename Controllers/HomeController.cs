@@ -86,6 +86,8 @@ namespace Todo_App_ASPNET_MVC.Controllers
             }
             return Redirect("http://localhost:5000/");
         }
+
+        
         // UPDATE
         [HttpGet]
         public JsonResult PopulateForm(int id){
@@ -134,6 +136,8 @@ namespace Todo_App_ASPNET_MVC.Controllers
                 return Redirect("http://localhost:5000/");
             }
         }
+
+
 
         // DELETE
         [HttpPost]
