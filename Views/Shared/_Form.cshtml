@@ -4,7 +4,7 @@
     <div asp-validation-summary="All"></div>
     <label asp-for="todo.Name"></label>
     <input asp-for="todo.Id" type="hidden"/>
-    <input asp-for="todo.Name"/>
+    <input asp-for="todo.Name" autofocus="autofocus"/>
     <span asp-validation-for="todo.Name"></span>
     <input type="submit" id="form-button" value="ADD" class="btn btn-success"/>
 </form>
